@@ -6,7 +6,7 @@
  * - returns undefined if no matching book is found
  ****************************************************************/
 function getBookById(bookId, books) {
-  // Your code goes here
+  return books.find(book => book.id === bookId);
 }
 
 /**************************************************************
@@ -17,7 +17,9 @@ function getBookById(bookId, books) {
  * - returns undefined if no matching author is found
  ****************************************************************/
 function getAuthorByName(authorName, authors) {
-  // Your code goes here
+  return authors.find(
+    author => author.name.toLowerCase() === authorName.toLowerCase()
+  );
 }
 
 /**************************************************************
@@ -27,7 +29,12 @@ function getAuthorByName(authorName, authors) {
  *    [{ author: <NAME>, bookCount: <NUMBER_OF_BOOKS> }]
  ****************************************************************/
 function bookCountsByAuthor(authors) {
-  // Your code goes here
+  return authors.map(author => {
+    return {
+      author: author.name,
+      bookCount: author.books.length
+    };
+  });
 }
 
 /**************************************************************
