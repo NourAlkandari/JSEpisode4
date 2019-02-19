@@ -46,7 +46,13 @@ function bookCountsByAuthor(authors) {
  ****************************************************************/
 function booksByColor(books) {
   const colors = {};
-
+  books.forEach(book => {
+    if (colors[book.color]) {
+      colors[book.color].push(book.title);
+    } else {
+      colors[book.color] = [book.title];
+    }
+  });
   // Your code goes here
 
   return colors;
@@ -61,7 +67,12 @@ function booksByColor(books) {
  *    ["The Hitchhikers Guide", "The Meaning of Liff"]
  ****************************************************************/
 function titlesByAuthorName(authorName, authors, books) {
-  // Your code goes here
+  const authorBook = getAuthorByName(authorName, authors);
+  if (!authorBook) {
+    return [];
+  } else {
+    return authorBook.books.map(bookId => getBookById(bookId, books).title);
+  }
 }
 
 /**************************************************************
@@ -72,7 +83,13 @@ function titlesByAuthorName(authorName, authors, books) {
  * Note: assume there will never be a tie
  ****************************************************************/
 function mostProlificAuthor(authors) {
-  // Your code goes here
+  let profAuthor = authors[0];
+  authors.forEach(author => {
+    if (author.books.length > profAuthor.books.length) {
+      profAuthor = author;
+    }
+  });
+  return profAuthor.name;
 }
 
 /**************************************************************
